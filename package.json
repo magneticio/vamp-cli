@@ -1,0 +1,29 @@
+{
+  "name": "vamp-cli",
+  "version": "0.1.0",
+  "description": "command line interface for vamp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "vamp": "index.js"
+  },
+  "author": "tim@magnetic.io",
+  "license": "Apache 2",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "cli-table": "^0.3.1",
+    "commander": "^2.11.0",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "eslint": "^3.14.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-friendly-formatter": "^2.0.7",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1"
+  }
+}
