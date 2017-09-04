@@ -30,39 +30,43 @@ class Deployment {
 
   /**
    * Creates a deployment based on a blueprint under a specified name.
-   * @param blueprintName
-   * @param deploymentName
+   * @param {string} deployment
+   * @param {string }blueprint
    * @return {Promise.<Object>}
    */
-  deploy (blueprintName, deploymentName) {
+  deploy (deployment, blueprint) {
     return this.http
-      .get(`/blueprints/${blueprintName}`)
-      .then(res => { return this.http.put(`/deployments/${deploymentName}`, res.data) })
+      .get(`/blueprints/${blueprint}`)
+      .then(res => { return this.http.put(`/deployments/${deployment}`, res.data) })
+      .catch(console.error)
+  }
+
+  merge (deployment, blueprint) {
+    return this.http
+      .get(`/blueprints/${blueprint}`)
+      .then(res => { return this.http.put(`/deployments/${deployment}`, res.data) })
       .catch(console.error)
   }
 
   /**
    * Removes a running deployment. When passed the full name, it will retrieve the deployment and then use that resource
    * description in the DELETE command to fully remove the whole deployment.
-   * @param {string} name - name of the deployment
-   * @params {array} [clusters] - array with names of one or more clusters
+   * @param {string} deployment - name of the deployment
+   * @param {string} [blueprint] - name of a blueprint
    * @return {Promise.<Object>}
    */
-  undeploy (name, clusters) {
-    if (clusters.length > 0) {
-      const deleteBody = { name }
-
-      cluster
-
+  undeploy (deployment, blueprint) {
+    if (blueprint) {
+      const deleteBody = { name: blueprint }
       return this.http({
-        url: `/deployments/${name}`,
+        url: `/deployments/${deployment}`,
         method: 'DELETE',
         data: deleteBody
       })
         .catch(console.error)
     } else {
       return this.http
-        .get(`/deployments/${name}`, {
+        .get(`/deployments/${deployment}`, {
           params: {
             as_blueprint: true,
             only_reference: true
@@ -70,7 +74,7 @@ class Deployment {
         })
         .then(res => {
           return this.http({
-            url: `/deployments/${name}`,
+            url: `/deployments/${deployment}`,
             method: 'DELETE',
             data: res.data
           })

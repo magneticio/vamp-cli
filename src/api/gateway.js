@@ -1,5 +1,5 @@
-/** Class representing a Breed resource */
-class Breed {
+/** Class representing a Gateway resource */
+class Gateway {
   /**
    * @param {object} http - instantiated axios client
    */
@@ -8,26 +8,27 @@ class Breed {
   }
 
   /**
-   * Get a list of breeds
+   * Get a list of gateways
    * @return {Promise.<Array>}
    */
   list () {
     return this.http
-      .get('/breeds')
+      .get('/gateways')
       .then(res => { return res.data })
       .catch(console.error)
   }
 
   /**
-   * Describes a single breed resource
+   * Describes a single gateway resource
    * @param {string} name - name of the breed
    * @return {Promise.<Object>}
    */
   describe (name) {
     return this.http
-      .get(`/breeds/${name}`)
+      .get(`/gateways/${name}`)
       .then(res => { return res.data })
+      .catch(console.error)
   }
 }
 
-module.exports = (axiosInstance) => { return new Breed(axiosInstance) }
+module.exports = (axiosInstance) => { return new Gateway(axiosInstance) }

@@ -1,14 +1,23 @@
 const api = require('../api')()
-
+const handleError = require('../utils').handleError
 module.exports = (program) => {
   program
     .command('deploy <blueprint> <deployment>')
+    .option('--stdin [file]', 'read from std in')
     .description('Creates a deployment, based on a blueprint, with a specified name')
-    .action((blueprint, deployment) => {
-      api.deployment.deploy(blueprint, deployment).then(showResult)
+    .action((blueprint, deployment, options) => {
+      if (options.stdin) {
+        console.log(options.parent.rawArgs.reverse()[0])
+      } else {
+        api.deployment.deploy(deployment, blueprint)
+          .then(handleResult)
+          .catch(handleError)
+      }
     })
 }
 
-function showResult (res) {
-  console.log(res)
+function handleResult (res) {
+  if (res.status === '202') {
+    console.log('Undeployment has been started (202)')
+  }
 }

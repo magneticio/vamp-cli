@@ -1,15 +1,19 @@
 const api = require('../api')()
-
+const handleError = require('../utils').handleError
 module.exports = (program) => {
   program
-    .command('undeploy <deployment> [clusters...]')
+    .command('undeploy <deployment> [blueprint]')
     .description('Removes (part of) a deployment. By only specifying the deployment name, the whole deployment will be removed. ' +
-      'To remove part of a deployment, specify one or more cluster names')
-    .action((name, clusters) => {
-      api.deployment.undeploy(name).then(showResult)
+      'To remove part of a deployment, specify the original blueprint name you want to remove')
+    .action((deployment, blueprint) => {
+      api.deployment.undeploy(deployment, blueprint)
+        .then(handleResult)
+        .catch(handleError)
     })
 }
 
-function showResult (res) {
-  console.log(res)
+function handleResult (res) {
+  if (res.status === '202') {
+    console.log('Undeployment has been started (202)')
+  }
 }

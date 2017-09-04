@@ -5,12 +5,14 @@ const api = require('../api')()
 module.exports = (program) => {
   program
     .command('list <artifact>')
-    .description('lists deployments, gateways, blueprints, breeds, workflows')
+    .description('Lists deployments, gateways, blueprints, breeds, workflows')
     .action(artifact => {
       switch (artifact) {
         case 'deployments':
-          api.deployment.list()
-            .then(listDeployments)
+          api.deployment.list().then(listDeployments)
+          break
+        case 'gateways':
+          api.gateway.list().then(listGateways)
           break
         case 'blueprints':
           api.blueprint.list().then(listBlueprints)
@@ -26,16 +28,36 @@ module.exports = (program) => {
 }
 
 function listDeployments (res) {
-  const headers = ['NAME', 'DEPLOYABLE']
+  const headers = ['NAME', 'CLUSTERS', 'PORTS']
   const data = []
   res.forEach(deployment => {
-    data.push([deployment.name, 'deployable'])
+    const clusters = []
+    _.forEach(deployment.clusters, (val, key) => {
+      clusters.push(key)
+    })
+
+    const ports = []
+    _.forEach(deployment.ports, (val, key) => {
+      ports.push(`${key}:${val}`)
+    })
+
+    data.push([deployment.name, clusters.join(', '), ports.join(', ')])
+  })
+  console.log(terminal.drawTable(headers, data))
+}
+
+function listGateways (res) {
+  const headers = ['NAME', 'PORT', 'SERVICE HOST', 'SERVICE PORT', 'STICKY', 'TYPE']
+  const data = []
+  res.forEach(gateway => {
+    const type = gateway.internal ? 'internal' : 'external'
+    const sticky = !!gateway.sticky
+    data.push([gateway.name, gateway.port, gateway.service.host, gateway.service.port, sticky, type])
   })
   console.log(terminal.drawTable(headers, data))
 }
 
 function listBlueprints (res) {
-  console.log(res)
   const headers = ['NAME', 'CLUSTERS']
   const data = []
   res.forEach(blueprint => {
@@ -43,7 +65,7 @@ function listBlueprints (res) {
     _.forEach(blueprint.clusters, (val, key) => {
       clusters.push(key)
     })
-    data.push([blueprint.name, clusters])
+    data.push([blueprint.name, clusters.join(', ')])
   })
   console.log(terminal.drawTable(headers, data))
 }
