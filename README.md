@@ -12,6 +12,31 @@ export VAMP_HOST=http://vamp-host
 vamp list breeds
 ```
 
+## Using the CLI
+
+For a list of all commands, just run the `--help` command
+
+```bash
+$ vamp --help
+
+  Usage: vamp <command> [options]
+
+
+  Options:
+
+    -V, --version  output the version number
+    -h, --help     output usage information
+
+
+  Commands:
+
+    deploy [options] <blueprint> <deployment>  Creates a deployment, based on a blueprint, with a specified name
+    describe <artifact> <name>                 Describe details of a deployment, gateway, blueprint, breed, workflow
+    list <artifact>                            Lists deployments, gateways, blueprints, breeds, workflows
+    merge <blueprint> <deployment>             Merges a blueprint to a  deployment
+    undeploy <deployment> [blueprint]          Removes (part of) a deployment. By only sp...
+```
+
 ## Use programmaticaly
 
 You can include the vamp-cli package in your code. It will expose the `api` object which you can use to interact with 
