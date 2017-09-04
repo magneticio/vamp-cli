@@ -10,7 +10,6 @@ module.exports = program => {
   }).forEach(function (filename) {
     const name = filename.substr(0, filename.lastIndexOf('.'))
     const command = require(path.join(loadPath, filename))
-    // Initialize command
     commands[name] = command(program)
   })
   return commands

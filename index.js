@@ -8,5 +8,8 @@ program
   .usage('<command> [options]')
 
 program.parse(process.argv)
-
+if (!process.argv.slice(2).length) {
+  program.outputHelp()
+  return
+}
 module.exports = require('./src/api')

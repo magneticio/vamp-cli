@@ -8,7 +8,7 @@ Vamp CLI is a Node.js package. Install it globally  and export the host address 
 Now you can run commands, e.g. `list breeds`
 ```bash
 npm install -g vamp-cli
-export VAMP_HOST=http://<vamp-host>
+export VAMP_HOST=http://vamp-host
 vamp list breeds
 ```
 

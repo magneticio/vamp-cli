@@ -1,5 +1,5 @@
-/** Class representing a Breed resource */
-class Breed {
+/** Class representing a Blueprint resource */
+class Blueprint {
   /**
    * @param {object} http - instantiated axios client
    */
@@ -8,27 +8,27 @@ class Breed {
   }
 
   /**
-   * Get a list of breeds
+   * Get a list of blueprints
    * @return {Promise.<Array>}
    */
   list () {
     return this.http
-      .get('/breeds')
+      .get('/blueprints')
       .then(res => { return res.data })
       .catch(console.error)
   }
 
   /**
-   * Describes a single breed resource
-   * @param {string} name - name of the breed
+   * Describes a single blueprint resource
+   * @param {string} name - name of the blueprint
    * @return {Promise.<Object>}
    */
   describe (name) {
     return this.http
-      .get(`/breeds/${name}`)
+      .get(`/blueprints/${name}`)
       .then(res => { return res.data })
       .catch(console.error)
   }
 }
 
-module.exports = (axiosInstance) => { return new Breed(axiosInstance) }
+module.exports = (axiosInstance) => { return new Blueprint(axiosInstance) }

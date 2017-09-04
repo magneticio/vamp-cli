@@ -17,6 +17,7 @@ exports = module.exports = (options = {}) => {
   return {
     deployment: require('./deployment')(axiosInstance),
     workflow: require('./workflow')(axiosInstance),
+    blueprint: require('./blueprint')(axiosInstance),
     breed: require('./breed')(axiosInstance)
   }
 }

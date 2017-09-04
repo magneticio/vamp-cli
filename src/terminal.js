@@ -1,4 +1,3 @@
-const chalk = require('chalk')
 const Table = require('cli-table')
 
 const chars = {

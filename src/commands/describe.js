@@ -13,6 +13,10 @@ module.exports = (program) => {
           break
         case 'breed':
           api.breed.describe(name).then(describeBreed)
+          break
+        case 'workflow':
+          api.workflow.describe(name).then(describeWorkflow)
+          break
       }
     })
 }
@@ -31,5 +35,13 @@ function describeBreed (res) {
   const data = []
   const deployable = res.deployable.type ? 'javascript' : res.deployable.definition
   data.push([res.name, deployable])
+  console.log(terminal.drawTable(headers, data))
+}
+
+function describeWorkflow (res) {
+  const headers = ['NAME', 'SCHEDULE', 'STATUS', 'BREED']
+  const schedule = res.schedule.event ? 'event' : res.schedule
+  const data = []
+  data.push([res.name, schedule, res.status, res.breed.reference])
   console.log(terminal.drawTable(headers, data))
 }

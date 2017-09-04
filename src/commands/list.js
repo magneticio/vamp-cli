@@ -1,3 +1,4 @@
+const _ = require('lodash')
 const terminal = require('../terminal')
 const api = require('../api')()
 
@@ -10,6 +11,9 @@ module.exports = (program) => {
         case 'deployments':
           api.deployment.list()
             .then(listDeployments)
+          break
+        case 'blueprints':
+          api.blueprint.list().then(listBlueprints)
           break
         case 'breeds':
           api.breed.list().then(listBreeds)
@@ -26,6 +30,20 @@ function listDeployments (res) {
   const data = []
   res.forEach(deployment => {
     data.push([deployment.name, 'deployable'])
+  })
+  console.log(terminal.drawTable(headers, data))
+}
+
+function listBlueprints (res) {
+  console.log(res)
+  const headers = ['NAME', 'CLUSTERS']
+  const data = []
+  res.forEach(blueprint => {
+    const clusters = []
+    _.forEach(blueprint.clusters, (val, key) => {
+      clusters.push(key)
+    })
+    data.push([blueprint.name, clusters])
   })
   console.log(terminal.drawTable(headers, data))
 }
