@@ -1,7 +1,8 @@
 const _ = require('lodash')
 const terminal = require('../terminal')
 const api = require('../api')()
-const handleError = require('../utils').handleError
+const handleError = require('../logging').handleError
+const helpers = require('./helpers')
 
 module.exports = (program) => {
   program
@@ -39,19 +40,21 @@ module.exports = (program) => {
 }
 
 function describeDeployment (res) {
-  const headers = ['SERVICE', 'DEPLOYABLE', 'CLUSTER', 'CPU', 'MEM', 'INSTANCES', 'RUNNING', 'STAGED', 'HEALTHY', 'UNHEALTHY']
+  const headers = ['SERVICE', 'DEPLOYABLE', 'STATUS', 'CLUSTER', 'CPU', 'MEM', 'INSTANCES', 'RUNNING', 'STAGED', 'HEALTHY', 'UNHEALTHY']
   const data = []
+  const defaultHealthStatus = { running: 'n/a', staged: 'n/a', healthy: 'n/a', unhealthy: 'n/a' }
   _.forEach(res.clusters, (val, key) => {
     const clusterName = key
     val.services.forEach(service => {
       const serviceName = service.breed.name
       const instances = service.scale.instances
+      const status = service.status.phase.name
       const cpu = service.scale.cpu
       const mem = service.scale.memory
-      const health = service.health
+      const health = status === helpers.deployment.constants.PHASE_FAILED ? defaultHealthStatus : service.health
 
       const deployable = service.breed.deployable.type ? 'javascript' : service.breed.deployable.definition
-      data.push([serviceName, deployable, clusterName, cpu, mem, instances, health.running, health.staged, health.healthy, health.unhealthy])
+      data.push([serviceName, deployable, status, clusterName, cpu, mem, instances, health.running, health.staged, health.healthy, health.unhealthy])
     })
   })
   console.log(terminal.drawTable(headers, data))

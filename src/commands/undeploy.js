@@ -1,5 +1,5 @@
 const api = require('../api')()
-const handleError = require('../utils').handleError
+const handleError = require('../logging').handleError
 module.exports = (program) => {
   program
     .command('undeploy <deployment> [blueprint]')

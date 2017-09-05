@@ -1,6 +1,8 @@
 const _ = require('lodash')
 const terminal = require('../terminal')
 const api = require('../api')()
+const handleError = require('../logging').handleError
+const helpers = require('./helpers')
 
 module.exports = (program) => {
   program
@@ -9,7 +11,9 @@ module.exports = (program) => {
     .action(artifact => {
       switch (artifact) {
         case 'deployments':
-          api.deployment.list().then(listDeployments)
+          api.deployment.list()
+            .then(listDeployments)
+            .catch(handleError)
           break
         case 'gateways':
           api.gateway.list().then(listGateways)
@@ -28,20 +32,21 @@ module.exports = (program) => {
 }
 
 function listDeployments (res) {
-  const headers = ['NAME', 'CLUSTERS', 'PORTS']
+  const headers = ['NAME', 'CLUSTERS', 'PORTS', 'STATUS']
   const data = []
   res.forEach(deployment => {
+    const status = helpers.deployment.rollupDeploymentStatus(deployment)
     const clusters = []
-    _.forEach(deployment.clusters, (val, key) => {
-      clusters.push(key)
+    _.forEach(deployment.clusters, (cluster, name) => {
+      clusters.push(name)
     })
 
     const ports = []
-    _.forEach(deployment.ports, (val, key) => {
-      ports.push(`${key}:${val}`)
+    _.forEach(deployment.ports, (port, name) => {
+      ports.push(`${name}:${port}`)
     })
 
-    data.push([deployment.name, clusters.join(', '), ports.join(', ')])
+    data.push([deployment.name, clusters.join(', '), ports.join(', '), status])
   })
   console.log(terminal.drawTable(headers, data))
 }
