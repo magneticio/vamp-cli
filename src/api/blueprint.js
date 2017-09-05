@@ -23,7 +23,7 @@ class Blueprint {
    * @param {string} name - name of the blueprint
    * @return {Promise.<Object>}
    */
-  describe (name) {
+  get (name) {
     return this.http
       .get(`/blueprints/${name}`)
       .then(res => { return res.data })

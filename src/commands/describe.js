@@ -11,27 +11,27 @@ module.exports = (program) => {
     .action((artifact, name) => {
       switch (artifact) {
         case 'deployment':
-          api.deployment.describe(name)
+          api.deployment.get(name)
             .then(describeDeployment)
             .catch(handleError)
           break
         case 'gateway':
-          api.gateway.describe(name)
+          api.gateway.get(name)
             .then(describeGateway)
             .catch(handleError)
           break
         case 'blueprint':
-          api.blueprint.describe(name)
+          api.blueprint.get(name)
             .then(describeBlueprint)
             .catch(handleError)
           break
         case 'breed':
-          api.breed.describe(name)
+          api.breed.get(name)
             .then(describeBreed)
             .catch(handleError)
           break
         case 'workflow':
-          api.workflow.describe(name)
+          api.workflow.get(name)
             .then(describeWorkflow)
             .catch(handleError)
           break
@@ -40,12 +40,16 @@ module.exports = (program) => {
 }
 
 function describeDeployment (res) {
-  const headers = ['SERVICE', 'DEPLOYABLE', 'STATUS', 'CLUSTER', 'CPU', 'MEM', 'INSTANCES', 'RUNNING', 'STAGED', 'HEALTHY', 'UNHEALTHY']
-  const data = []
+  const servicesHeaders = ['SERVICE', 'DEPLOYABLE', 'STATUS', 'CLUSTER', 'CPU', 'MEM', 'INSTANCES', 'RUNNING', 'STAGED', 'HEALTHY', 'UNHEALTHY']
+  const servicesData = []
+
+  const routesHeaders = ['ROUTE', 'WEIGHT', 'CONDITION', 'STRENGTH', 'GATEWAY']
+  const routesData = []
+
   const defaultHealthStatus = { running: 'n/a', staged: 'n/a', healthy: 'n/a', unhealthy: 'n/a' }
-  _.forEach(res.clusters, (val, key) => {
-    const clusterName = key
-    val.services.forEach(service => {
+  _.forEach(res.clusters, (cluster, name) => {
+    const clusterName = name
+    cluster.services.forEach(service => {
       const serviceName = service.breed.name
       const instances = service.scale.instances
       const status = service.status.phase.name
@@ -54,10 +58,21 @@ function describeDeployment (res) {
       const health = status === helpers.deployment.constants.PHASE_FAILED ? defaultHealthStatus : service.health
 
       const deployable = service.breed.deployable.type ? 'javascript' : service.breed.deployable.definition
-      data.push([serviceName, deployable, status, clusterName, cpu, mem, instances, health.running, health.staged, health.healthy, health.unhealthy])
+      servicesData.push([serviceName, deployable, status, clusterName, cpu, mem, instances, health.running, health.staged, health.healthy, health.unhealthy])
+    })
+
+    _.forEach(cluster.gateways, (gateway, name) => {
+      console.log(gateway)
+      const gatewayName = name
+      _.forEach(gateway.routes, (route, name) => {
+        const condition = route.condition ? route.condition.condition : '-'
+        routesData.push([name, route.weight, condition, route.condition_strength, gatewayName])
+      })
     })
   })
-  console.log(terminal.drawTable(headers, data))
+
+  console.log(terminal.drawTable(servicesHeaders, servicesData))
+  console.log(terminal.drawTable(routesHeaders, routesData))
 }
 
 function describeGateway (res) {

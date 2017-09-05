@@ -21,7 +21,7 @@ class Deployment {
    * @param  {string} name - name of the deployment
    * @return {Promise.<Object>}
    */
-  describe (name) {
+  get (name) {
     return this.http
       .get(`/deployments/${name}`)
       .then(res => { return res.data })
@@ -52,18 +52,17 @@ class Deployment {
    * Removes a running deployment. When passed the full name, it will retrieve the deployment and then use that resource
    * description in the DELETE command to fully remove the whole deployment.
    * @param {string} deployment - name of the deployment
-   * @param {string} [blueprint] - name of a blueprint
+   * @param {string} [service] - name of a service to remove from a deployment
    * @return {Promise.<Object>}
    */
-  undeploy (deployment, blueprint) {
-    if (blueprint) {
-      const deleteBody = { name: blueprint }
+  undeploy (deployment, service) {
+    if (service) {
+      const deleteBody = { name: service }
       return this.http({
         url: `/deployments/${deployment}`,
         method: 'DELETE',
         data: deleteBody
       })
-        .catch(console.error)
     } else {
       return this.http
         .get(`/deployments/${deployment}`, {
@@ -79,7 +78,6 @@ class Deployment {
             data: res.data
           })
         })
-        .catch(console.error)
     }
   }
 }

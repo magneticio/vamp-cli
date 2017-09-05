@@ -21,7 +21,7 @@ class Workflow {
    * @param  {string} name - name of the workflow
    * @return {Promise.<Object>}
    */
-  describe (name) {
+  get (name) {
     return this.http
       .get(`/workflows/${name}`)
       .then(res => { return res.data })

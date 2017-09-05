@@ -23,7 +23,7 @@ class Gateway {
    * @param {string} name - name of the breed
    * @return {Promise.<Object>}
    */
-  describe (name) {
+  get (name) {
     return this.http
       .get(`/gateways/${name}`)
       .then(res => { return res.data })
