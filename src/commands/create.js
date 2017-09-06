@@ -15,7 +15,7 @@ module.exports = (program) => {
         return console.log('Please pass in an artefact from a file or from stdin.')
       }
       if (options.file && options.stdin) {
-        return console.log('Please choose either the --file option or the --stdin option')
+        return console.log('Please choose either the --file option or the --stdin option.')
       }
 
       let resource = ''
@@ -38,7 +38,7 @@ module.exports = (program) => {
             .catch(handleError)
           break
         default:
-          return console.log('Please choose either a "blueprint" or "breed" as artifact')
+          return console.log('Please choose either a "blueprint" or "breed" as artifact.')
       }
     })
 }

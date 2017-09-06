@@ -7,7 +7,7 @@ const helpers = require('./helpers')
 module.exports = (program) => {
   program
     .command('list <artifact>')
-    .description('Lists deployments, gateways, blueprints, breeds, workflows')
+    .description('Lists deployments, gateways, blueprints, breeds, workflows.')
     .action(artifact => {
       switch (artifact) {
         case 'deployments':
@@ -33,7 +33,7 @@ module.exports = (program) => {
             .then(listWorkflows)
           break
         default:
-          console.log('Please choose the artifact to list: deployments, gateways, blueprints, breeds, workflows')
+          console.log('Please choose the artifact to list: deployments, gateways, blueprints, breeds, workflows.')
       }
     })
 }

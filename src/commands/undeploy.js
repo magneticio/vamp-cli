@@ -4,7 +4,7 @@ module.exports = (program) => {
   program
     .command('undeploy <deployment>')
     .description('Removes a deployment or a specific service in a deployment.')
-    .option('-s, --service <service>', 'Specifies the service to remove from a deployment')
+    .option('-s, --service <service>', 'Specifies the service to remove from a deployment.')
     .action((deployment, options) => {
       api.deployment.undeploy(deployment, options.service)
         .then(handleResult)

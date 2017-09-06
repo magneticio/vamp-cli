@@ -4,8 +4,8 @@ const handleError = require('../logging').handleError
 module.exports = (program) => {
   program
     .command('emit <value>')
-    .description('Sends an event to Vamp event system. Returns the created event on success.')
-    .option('-t, --tags <tags>', 'Comma separated list of tags to add to the event')
+    .description('Emits an event on the Vamp event bus. Returns the created event on success.')
+    .option('-t, --tags <tags>', 'Comma separated list of tags to add to the event.')
     .action((value, options) => {
       const tags = options.tags ? options.tags.split(',') : []
       api.event.emit(value, tags)

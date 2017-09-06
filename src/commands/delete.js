@@ -4,7 +4,7 @@ const handleError = require('../logging').handleError
 module.exports = (program) => {
   program
     .command('delete <artifact> <name>')
-    .description('Deletes artifacts like gateways, blueprints, breeds, workflows')
+    .description('Deletes artifacts like gateways, blueprints, breeds, workflows.')
     .action((artifact, name) => {
       switch (artifact) {
         case 'gateway':
@@ -28,7 +28,7 @@ module.exports = (program) => {
             .catch(handleError)
           break
         default:
-          console.log('Please choose an artifact: gateway, blueprint, breed')
+          console.log('Please choose an artifact: gateway, blueprint, breed.')
       }
     })
 }
