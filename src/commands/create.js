@@ -35,7 +35,7 @@ module.exports = (program) => {
         case 'breed':
           api.breed.create(resource)
             .then(handleResult)
-            .then(handleError)
+            .catch(handleError)
           break
         default:
           return console.log('Please choose either a "blueprint" or "breed" as artifact')
@@ -44,5 +44,6 @@ module.exports = (program) => {
 }
 
 function handleResult (res) {
+  console.log(res)
   console.log(YAML.stringify(res, 12, 2))
 }
