@@ -8,7 +8,8 @@ module.exports = (program) => {
     .command('create <artifact>')
     .option('-f, --file <file>', 'read from file')
     .option('-s, --stdin [file]', 'read from std in')
-    .description('Creates an blueprint or breed artifact based on passed YAML. Returns the created artefact after creation.')
+    .description('Creates an blueprint or breed artifact based on passed YAML. Returns the created artifact after ' +
+      'creation.')
     .action((artifact, options) => {
       if (!options.file && !options.stdin) {
         return console.log('Please pass in an artefact from a file or from stdin.')

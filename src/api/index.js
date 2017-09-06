@@ -19,7 +19,8 @@ exports = module.exports = (options = {}) => {
     gateway: require('./gateway')(axiosInstance),
     workflow: require('./workflow')(axiosInstance),
     blueprint: require('./blueprint')(axiosInstance),
-    breed: require('./breed')(axiosInstance)
+    breed: require('./breed')(axiosInstance),
+    event: require('./event')(axiosInstance)
   }
 }
 
