@@ -62,7 +62,6 @@ function describeDeployment (res) {
     })
 
     _.forEach(cluster.gateways, (gateway, name) => {
-      console.log(gateway)
       const gatewayName = name
       _.forEach(gateway.routes, (route, name) => {
         const condition = route.condition ? route.condition.condition : '-'
