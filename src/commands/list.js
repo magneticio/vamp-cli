@@ -32,6 +32,8 @@ module.exports = (program) => {
           api.workflow.list()
             .then(listWorkflows)
           break
+        default:
+          console.log('Please choose the artifact to list: deployments, gateways, blueprints, breeds, workflows')
       }
     })
 }
