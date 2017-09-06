@@ -15,7 +15,6 @@ class Gateway {
     return this.http
       .get('/gateways')
       .then(res => { return res.data })
-      .catch(console.error)
   }
 
   /**
@@ -27,7 +26,6 @@ class Gateway {
     return this.http
       .get(`/gateways/${name}`)
       .then(res => { return res.data })
-      .catch(console.error)
   }
 }
 

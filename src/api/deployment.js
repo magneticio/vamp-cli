@@ -14,7 +14,6 @@ class Deployment {
     return this.http
       .get('/deployments/')
       .then(res => { return res.data })
-      .catch(console.error)
   }
   /**
    * Describes a single deployment resource
@@ -25,7 +24,6 @@ class Deployment {
     return this.http
       .get(`/deployments/${name}`)
       .then(res => { return res.data })
-      .catch(err => console.error(err))
   }
 
   /**
@@ -38,14 +36,12 @@ class Deployment {
     return this.http
       .get(`/blueprints/${blueprint}`)
       .then(res => { return this.http.put(`/deployments/${deployment}`, res.data) })
-      .catch(console.error)
   }
 
   merge (deployment, blueprint) {
     return this.http
       .get(`/blueprints/${blueprint}`)
       .then(res => { return this.http.put(`/deployments/${deployment}`, res.data) })
-      .catch(console.error)
   }
 
   /**

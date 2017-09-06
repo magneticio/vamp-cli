@@ -14,7 +14,6 @@ class Workflow {
     return this.http
       .get('/workflows')
       .then(res => { return res.data })
-      .catch(console.error)
   }
   /**
    * Describes a single workflow resource
@@ -25,7 +24,6 @@ class Workflow {
     return this.http
       .get(`/workflows/${name}`)
       .then(res => { return res.data })
-      .catch(console.error)
   }
 }
 

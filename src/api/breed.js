@@ -15,7 +15,6 @@ class Breed {
     return this.http
       .get('/breeds')
       .then(res => { return res.data })
-      .catch(console.error)
   }
 
   /**
@@ -26,6 +25,17 @@ class Breed {
   get (name) {
     return this.http
       .get(`/breeds/${name}`)
+      .then(res => { return res.data })
+  }
+
+  /**
+   * Creates a breed based on a passed in Javascript object.
+   * @param {object} breed - a breed resource.
+   * @return {Promise.<Object>}
+   */
+  create (breed) {
+    return this.http
+      .put(`/breeds/${breed.name}`, breed)
       .then(res => { return res.data })
   }
 }

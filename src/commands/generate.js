@@ -1,4 +1,5 @@
 const _ = require('lodash')
+const YAML = require('yamljs')
 const api = require('../api')()
 const handleError = require('../logging').handleError
 
@@ -12,7 +13,6 @@ module.exports = (program) => {
     .option('-b, --breed <name>', 'Only valid for blueprint, the breed to replace in the blueprint source.')
     .option('-t, --target <name>', 'The name of the to be created artifact.')
     .action((artifact, options) => {
-      console.log(`${options.source}, ${options.deployable}, ${options.target}`)
       switch (artifact) {
         case 'blueprint':
           if (!options.source || !options.cluster || !options.breed || !options.target) {
@@ -21,7 +21,7 @@ module.exports = (program) => {
             api.blueprint.get(options.source)
               .then(blueprint => {
                 const newBlueprint = generateBlueprint(blueprint, options)
-                return console.log(JSON.stringify(newBlueprint, null, 2))
+                return console.log(YAML.stringify(newBlueprint, 12, 2))
               })
               .catch(handleError)
           }
@@ -34,7 +34,7 @@ module.exports = (program) => {
             api.breed.get(options.source)
               .then(breed => {
                 const newBreed = generateBreed(breed, options)
-                return console.log(JSON.stringify(newBreed, null, 2))
+                return console.log(YAML.stringify(newBreed, 12, 2))
               })
               .catch(handleError)
           }
@@ -49,7 +49,6 @@ function generateBreed (breed, options) {
 }
 
 function generateBlueprint (blueprint, options) {
-  // console.log(JSON.stringify(blueprint, null, 2))
   blueprint.clusters[options.cluster].services = { breed: options.breed }
   blueprint.name = options.target
   return _.omitBy(blueprint, _.isEmpty)

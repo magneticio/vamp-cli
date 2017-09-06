@@ -15,7 +15,6 @@ class Blueprint {
     return this.http
       .get('/blueprints')
       .then(res => { return res.data })
-      .catch(console.error)
   }
 
   /**
@@ -27,7 +26,17 @@ class Blueprint {
     return this.http
       .get(`/blueprints/${name}`)
       .then(res => { return res.data })
-      .catch(console.error)
+  }
+
+  /**
+   * Creates a blueprint based on a passed in Javascript object.
+   * @param {object} blueprint - a blueprint resource.
+   * @return {Promise.<Object>}
+   */
+  create (blueprint) {
+    return this.http
+      .put(`/blueprints/${blueprint.name}`, blueprint)
+      .then(res => { return res.data })
   }
 }
 

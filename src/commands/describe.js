@@ -82,16 +82,15 @@ function describeGateway (res) {
   data = data + `Port: ${res.port}\n`
   data = data + `Service host: ${res.service.host}\n`
   data = data + `Service port: ${res.service.port}\n`
-  data = data + `Sticky: ${!!res.sticky}\n`
-  data = data + 'Routes: \n'
+  data = data + `Sticky: ${!!res.sticky}`
   console.log(data)
 
-  const routesHeaders = ['NAME', 'WEIGHT', 'CONDITION', 'STRENGTH', 'TARGETS']
+  const routesHeaders = ['ROUTE', 'WEIGHT', 'CONDITION', 'STRENGTH', 'TARGETS']
   const routesData = []
-  _.forEach(res.routes, (val, key) => {
-    const condition = val.condition || '-'
-    const targets = val.targets.map(target => { return `${target.host}:${target.port}` })
-    routesData.push([key, val.weight, condition, val.condition_strength, targets.join(', ')])
+  _.forEach(res.routes, (route, name) => {
+    const condition = route.condition ? route.condition.condition : '-'
+    const targets = route.targets.map(target => { return `${target.host}:${target.port}` })
+    routesData.push([name, route.weight, condition, route.condition_strength, targets.join(', ')])
   })
   console.log(terminal.drawTable(routesHeaders, routesData))
 }
@@ -99,9 +98,9 @@ function describeGateway (res) {
 function describeBlueprint (res) {
   const headers = ['SERVICES', 'DEPLOYABLE', 'CPU', 'MEM', 'INSTANCES', 'CLUSTER']
   const data = []
-  _.forEach(res.clusters, (val, key) => {
-    const clusterName = key
-    val.services.forEach(service => {
+  _.forEach(res.clusters, (cluster, name) => {
+    const clusterName = name
+    cluster.services.forEach(service => {
       const serviceName = service.breed.name
       const instances = service.scale.instances
       const cpu = service.scale.cpu

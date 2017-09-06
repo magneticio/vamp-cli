@@ -16,16 +16,21 @@ module.exports = (program) => {
             .catch(handleError)
           break
         case 'gateways':
-          api.gateway.list().then(listGateways)
+          api.gateway.list()
+            .then(listGateways)
+            .catch(handleError)
           break
         case 'blueprints':
-          api.blueprint.list().then(listBlueprints)
+          api.blueprint.list()
+            .then(listBlueprints)
           break
         case 'breeds':
-          api.breed.list().then(listBreeds)
+          api.breed.list()
+            .then(listBreeds)
           break
         case 'workflows':
-          api.workflow.list().then(listWorkflows)
+          api.workflow.list()
+            .then(listWorkflows)
           break
       }
     })
