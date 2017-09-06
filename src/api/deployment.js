@@ -41,7 +41,9 @@ class Deployment {
   merge (deployment, blueprint) {
     return this.http
       .get(`/blueprints/${blueprint}`)
-      .then(res => { return this.http.put(`/deployments/${deployment}`, res.data) })
+      .then(res => {
+        return this.http.put(`/deployments/${deployment}`, res.data)
+      })
   }
 
   /**
