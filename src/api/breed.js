@@ -41,12 +41,12 @@ class Breed {
 
   /**
    * Deletes the artifact
-   * @param {string} breed - Name of the artifact
+   * @param {string} name - Name of the artifact
    * @return {Promise.<Object>}
    */
-  delete (breed) {
+  delete (name) {
     return this.http
-      .delete(`/breeds/${breed}`)
+      .delete(`/breeds/${name}`)
       .then(res => { return res })
   }
 }

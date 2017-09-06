@@ -41,12 +41,12 @@ class Blueprint {
 
   /**
    * Deletes the artifact
-   * @param {string} blueprint - Name of the artifact
+   * @param {string} name - Name of the artifact
    * @return {Promise.<Object>}
    */
-  delete (blueprint) {
+  delete (name) {
     return this.http
-      .delete(`/blueprints/${blueprint}`)
+      .delete(`/blueprints/${name}`)
       .then(res => { return res })
   }
 }

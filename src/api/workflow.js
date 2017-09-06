@@ -31,9 +31,9 @@ class Workflow {
    * @param {string} workflow - Name of the artifact
    * @return {Promise.<Object>}
    */
-  delete (workflow) {
+  delete (name) {
     return this.http
-      .delete(`/workflows/${workflow}`)
+      .delete(`/workflows/${name}`)
       .then(res => { return res })
   }}
 

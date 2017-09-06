@@ -30,12 +30,12 @@ class Gateway {
 
   /**
    * Deletes the artifact
-   * @param {string} gateway - Name of the artifact
+   * @param {string} name - Name of the artifact
    * @return {Promise.<Object>}
    */
-  delete (gateway) {
+  delete (name) {
     return this.http
-      .delete(`/gateways/${gateway}`)
+      .delete(`/gateways/${name}`)
       .then(res => { return res })
   }
 }

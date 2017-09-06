@@ -41,7 +41,7 @@ $ vamp
     undeploy [options] <deployment>            Removes a deployment or a specific service in a deployment.
 ```
 
-## Using the cLI programmaticaly
+## Using the CLI programmaticaly
 
 You can include the vamp-cli package in your code. It will expose the `api` object which you can use to interact with 
 Vamp in your Node.js code.  
@@ -53,4 +53,9 @@ const vamp = require('vamp-cli')({ host: 'http://localhost:8080'})
 
 vamp.breed.list()
   .then(res => console.info(res))
+  
+vamp.deployment.describe('mydeployment')
+.then(res => console.info(res))  
+  
+
 ```
