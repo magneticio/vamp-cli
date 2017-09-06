@@ -3,8 +3,7 @@ const handleError = require('../logging').handleError
 module.exports = (program) => {
   program
     .command('undeploy <deployment>')
-    .description('Removes a deployment. By only specifying the deployment name, the whole deployment will be removed. ' +
-      'To remove part of a deployment, use the --service option')
+    .description('Removes a deployment or a specific service in a deployment.')
     .option('-s, --service <service>', 'Specifies the service to remove from a deployment')
     .action((deployment, options) => {
       api.deployment.undeploy(deployment, options.service)
