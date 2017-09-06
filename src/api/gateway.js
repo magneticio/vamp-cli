@@ -27,6 +27,17 @@ class Gateway {
       .get(`/gateways/${name}`)
       .then(res => { return res.data })
   }
+
+  /**
+   * Deletes the artifact
+   * @param {string} gateway - Name of the artifact
+   * @return {Promise.<Object>}
+   */
+  delete (gateway) {
+    return this.http
+      .delete(`/gateways/${gateway}`)
+      .then(res => { return res })
+  }
 }
 
 module.exports = (axiosInstance) => { return new Gateway(axiosInstance) }

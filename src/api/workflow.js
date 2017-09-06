@@ -25,6 +25,16 @@ class Workflow {
       .get(`/workflows/${name}`)
       .then(res => { return res.data })
   }
-}
+
+  /**
+   * Deletes the artifact
+   * @param {string} workflow - Name of the artifact
+   * @return {Promise.<Object>}
+   */
+  delete (workflow) {
+    return this.http
+      .delete(`/workflows/${workflow}`)
+      .then(res => { return res })
+  }}
 
 module.exports = (axiosInstance) => { return new Workflow(axiosInstance) }

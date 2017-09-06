@@ -38,6 +38,17 @@ class Breed {
       .put(`/breeds/${breed.name}`, breed)
       .then(res => { return res.data })
   }
+
+  /**
+   * Deletes the artifact
+   * @param {string} breed - Name of the artifact
+   * @return {Promise.<Object>}
+   */
+  delete (breed) {
+    return this.http
+      .delete(`/breeds/${breed}`)
+      .then(res => { return res })
+  }
 }
 
 module.exports = (axiosInstance) => { return new Breed(axiosInstance) }

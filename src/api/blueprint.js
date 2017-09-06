@@ -38,6 +38,17 @@ class Blueprint {
       .put(`/blueprints/${blueprint.name}`, blueprint)
       .then(res => { return res.data })
   }
+
+  /**
+   * Deletes the artifact
+   * @param {string} blueprint - Name of the artifact
+   * @return {Promise.<Object>}
+   */
+  delete (blueprint) {
+    return this.http
+      .delete(`/blueprints/${blueprint}`)
+      .then(res => { return res })
+  }
 }
 
 module.exports = (axiosInstance) => { return new Blueprint(axiosInstance) }
