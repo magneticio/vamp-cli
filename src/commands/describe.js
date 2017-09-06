@@ -2,7 +2,7 @@ const _ = require('lodash')
 const terminal = require('../terminal')
 const api = require('../api')()
 const handleError = require('../logging').handleError
-const helpers = require('./helpers')
+const constants = require('./helpers').deployment.constants
 
 module.exports = (program) => {
   program
@@ -55,7 +55,7 @@ function describeDeployment (res) {
       const status = service.status.phase.name
       const cpu = service.scale.cpu
       const mem = service.scale.memory
-      const health = status === helpers.deployment.constants.PHASE_FAILED ? defaultHealthStatus : service.health
+      const health = status === constants.PHASE_FAILED || constants.PHASE_UPDATING ? defaultHealthStatus : service.health
 
       const deployable = service.breed.deployable.type ? 'javascript' : service.breed.deployable.definition
       servicesData.push([serviceName, deployable, status, clusterName, cpu, mem, instances, health.running, health.staged, health.healthy, health.unhealthy])
