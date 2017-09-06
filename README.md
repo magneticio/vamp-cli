@@ -57,5 +57,6 @@ vamp.breed.list()
 vamp.deployment.describe('mydeployment')
 .then(res => console.info(res))  
   
-
 ```
+
+Checkout the `api.md` file for jsDoc styled API docs
