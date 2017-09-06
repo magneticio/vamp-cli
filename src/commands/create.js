@@ -44,6 +44,5 @@ module.exports = (program) => {
 }
 
 function handleResult (res) {
-  console.log(res)
   console.log(YAML.stringify(res, 12, 2))
 }
