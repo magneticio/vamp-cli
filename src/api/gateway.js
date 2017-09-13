@@ -38,6 +38,18 @@ class Gateway {
       .delete(`/gateways/${name}`)
       .then(res => { return res })
   }
+
+  /**
+   * Updates a gateway
+   * @param {string} name - Name of the artifact
+   * @param {object} payload - A full gateway artifact
+   * @return {Promise.<Object>}
+   */
+  update (name, payload) {
+    return this.http
+      .put(`/gateways/${name}`, payload)
+      .then(res => { return res })
+  }
 }
 
 module.exports = (axiosInstance) => { return new Gateway(axiosInstance) }
