@@ -44,6 +44,32 @@ $ vamp
     update-gateway [options] <name>            Updates either weight or condition for a gateway and its routes.
 ```
 
+Here are some example commands:
+
+
+```bash
+# deploy a blueprint
+vamp deploy myService:1.0.0 myDeployment
+
+# get the details of a deployment
+vamp describe deployment myDeployment
+
+# merge a blueprint to a running deployment
+vamp merge myService:1.1.0 myDeployment
+
+# get the details of a gateway
+vamp describe gateway myDeployment/myService/web
+
+# set a condition on specific route in a gateway
+vamp update-gateway myDeployment/myService/web --route  myDeployment/myCluster/myService:1.1.0/web --condition "User-Agent == Safari" --strength 100%
+
+# set the weight distribution on set of routes in a gateway
+vamp update-gateway myDeployment/myService/web --weights myDeployment/myCluster/myService:1.0.0/web@50%,myDeployment/myCluster/myService:1.1.0/web@50%
+
+# undeploy a specific service of a deployment
+vamp undeploy myDeployment --service myService:1.0.0 
+```
+
 ## Using the CLI programmatically
 
 You can include the vamp-cli package in your code. It will expose the `api` object which you can use to interact with 
