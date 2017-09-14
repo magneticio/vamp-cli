@@ -1,4 +1,4 @@
-# Vamp CLI (work in progress)
+# Vamp CLI
 
 This CLI for [vamp](https://vamp.io) replace the old Scala based CLI.
 
@@ -31,17 +31,18 @@ $ vamp
   Commands:
 
     create [options] <artifact>                Creates an blueprint or breed artifact based on passed YAML. Returns the created artifact after creation.
-    delete <artifact> <name>                   Deletes artifacts like gateways, blueprints, breeds, workflows
-    deploy [options] <blueprint> <deployment>  Creates a deployment, based on a blueprint, with a specified name
+    delete <artifact> <name>                   Deletes artifacts like gateways, blueprints, breeds, workflows.
+    deploy [options] <blueprint> <deployment>  Creates a deployment, based on a blueprint, with a specified name.
     describe <artifact> <name>                 Describe details of a deployment, gateway, blueprint, breed, workflow
-    emit [options] <value>                     Sends an event to Vamp event system. Returns the created event on success.
+    emit [options] <value>                     Emits an event on the Vamp event bus. Returns the created event on success.
     generate [options] <artifact>              Generate a breed or blueprint based on an existing one.
-    list <artifact>                            Lists deployments, gateways, blueprints, breeds, workflows
-    merge <blueprint> <deployment>             Merges a blueprint to a  deployment
+    list <artifact>                            Lists deployments, gateways, blueprints, breeds, workflows.
+    merge <blueprint> <deployment>             Merges a blueprint to a deployment.
     undeploy [options] <deployment>            Removes a deployment or a specific service in a deployment.
+    update-gateway [options] <name>            Updates either weight or condition for a gateway and its routes.
 ```
 
-## Using the CLI programmaticaly
+## Using the CLI programmatically
 
 You can include the vamp-cli package in your code. It will expose the `api` object which you can use to interact with 
 Vamp in your Node.js code.  

@@ -1,10 +1,11 @@
 {
   "name": "vamp-cli",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "The command line interface for vamp",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/mocha src/**/*.test.js",
+    "jsdoc-markdown": "node_modules/.bin/jsdoc2md src/**/*.js > api.md"
   },
   "bin": {
     "vamp": "index.js"
@@ -19,12 +20,13 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "chai": "^4.1.1",
     "eslint": "^3.14.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-friendly-formatter": "^2.0.7",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-promise": "^3.4.0",
-    "eslint-plugin-standard": "^2.0.1"
+    "eslint-plugin-standard": "^2.0.1",
+    "jsdoc-to-markdown": "^3.0.0",
+    "sinon": "^3.2.1"
   }
 }

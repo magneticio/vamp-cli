@@ -250,6 +250,7 @@ Class representing a Gateway resource
     * [.list()](#Gateway+list) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.get(name)](#Gateway+get) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.delete(name)](#Gateway+delete) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.update(name, payload)](#Gateway+update) ⇒ <code>Promise.&lt;Object&gt;</code>
 
 <a name="new_Gateway_new"></a>
 
@@ -286,6 +287,18 @@ Deletes the artifact
 | Param | Type | Description |
 | --- | --- | --- |
 | name | <code>string</code> | Name of the artifact |
+
+<a name="Gateway+update"></a>
+
+### gateway.update(name, payload) ⇒ <code>Promise.&lt;Object&gt;</code>
+Updates a gateway
+
+**Kind**: instance method of [<code>Gateway</code>](#Gateway)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the artifact |
+| payload | <code>object</code> | A full gateway artifact |
 
 <a name="Workflow"></a>
 

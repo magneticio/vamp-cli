@@ -27,7 +27,7 @@ function drawTable (headers, data) {
   const table = new Table({ head: headers, chars })
   data.forEach(item => {
     table.push(item)
-})
+  })
   return table.toString()
 }
 
