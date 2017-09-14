@@ -1,4 +1,6 @@
-# Vamp CLI
+# Vamp CLI 
+
+[![Build Status](https://travis-ci.org/magneticio/vamp-cli.svg?branch=master)](https://travis-ci.org/magneticio/vamp-cli)
 
 This CLI for [vamp](https://vamp.io) replace the old Scala based CLI.
 
