@@ -311,6 +311,7 @@ Class representing a Workflow resource
     * [new Workflow(http)](#new_Workflow_new)
     * [.list()](#Workflow+list) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.get(name)](#Workflow+get) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.create(workflow)](#Workflow+create) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.delete(workflow)](#Workflow+delete) ⇒ <code>Promise.&lt;Object&gt;</code>
 
 <a name="new_Workflow_new"></a>
@@ -337,6 +338,17 @@ Describes a single workflow resource
 | Param | Type | Description |
 | --- | --- | --- |
 | name | <code>string</code> | name of the workflow |
+
+<a name="Workflow+create"></a>
+
+### workflow.create(workflow) ⇒ <code>Promise.&lt;Object&gt;</code>
+Creates a workflow based on a passed in Javascript object.
+
+**Kind**: instance method of [<code>Workflow</code>](#Workflow)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| workflow | <code>object</code> | a workflow resource. |
 
 <a name="Workflow+delete"></a>
 
