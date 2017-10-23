@@ -35,6 +35,7 @@ class Workflow {
     return this.http
       .delete(`/workflows/${name}`)
       .then(res => { return res })
-  }}
+  }
+}
 
 module.exports = (axiosInstance) => { return new Workflow(axiosInstance) }
