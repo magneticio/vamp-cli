@@ -8,7 +8,7 @@ module.exports = (program) => {
     .command('create <artifact>')
     .option('-f, --file <file>', 'read from file')
     .option('-s, --stdin [file]', 'read from std in')
-    .description('Creates an blueprint or breed artifact based on passed YAML. Returns the created artifact after ' +
+    .description('Creates an blueprint, breed or workflow artifact based on passed YAML. Returns the created artifact after ' +
       'creation.')
     .action((artifact, options) => {
       if (!options.file && !options.stdin) {
@@ -37,8 +37,13 @@ module.exports = (program) => {
             .then(handleResult)
             .catch(handleError)
           break
+        case 'workflow':
+          api.workflow.create(resource)
+            .then(handleResult)
+            .catch(handleError)
+          break
         default:
-          return console.log('Please choose either a "blueprint" or "breed" as artifact.')
+          return console.log('Please choose either a "blueprint", "breed" or "workflow" as artifact.')
       }
     })
 }

@@ -27,6 +27,17 @@ class Workflow {
   }
 
   /**
+   * Creates a workflow based on a passed in Javascript object.
+   * @param {object} workflow - a workflow resource.
+   * @return {Promise.<Object>}
+   */
+  create (workflow) {
+    return this.http
+      .put(`/workflows/${workflow.name}`, workflow)
+      .then(res => { return res.data })
+  }
+
+  /**
    * Deletes the artifact
    * @param {string} workflow - Name of the artifact
    * @return {Promise.<Object>}
