@@ -78,7 +78,7 @@ Configure the host by either setting the `VAMP_HOST` environment variable or pas
 
 
 ```javascript
-const vamp = require('vamp-cli')({ host: 'http://localhost:8080'})
+const vamp = require('vamp-cli/src/api')({ host: 'http://localhost:8080'})
 
 vamp.breed.list()
   .then(res => console.info(res))

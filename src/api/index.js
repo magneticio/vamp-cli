@@ -3,7 +3,9 @@ const axios = require('axios')
 const defaults = {
   host: process.env.VAMP_HOST || 'http://localhost/',
   apiVersion: '/api/v1/',
-  timeout: 5000
+  timeout: 5000,
+  token: null,
+  namespace: null
 }
 
 exports = module.exports = (options = {}) => {
