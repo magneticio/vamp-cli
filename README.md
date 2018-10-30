@@ -83,7 +83,7 @@ const vamp = require('vamp-cli/src/api')({ host: 'http://localhost:8080'})
 vamp.breed.list()
   .then(res => console.info(res))
   
-vamp.deployment.describe('mydeployment')
+vamp.deployment.get('mydeployment')
 .then(res => console.info(res))  
   
 ```
